@@ -6,6 +6,10 @@ selinux_state: disabled
 implementer_interface: disabled
 omods: ["https://s3.ap-south-1.amazonaws.com/bahmni-msf/release-artifacts/release-3.4/bahmnimsf-2.0.omod", "https://s3.ap-south-1.amazonaws.com/bahmni-msf/release-artifacts/release-3.4/operationtheater-1.1.0.omod"]
 bahmniapps_url: https://s3.ap-south-1.amazonaws.com/bahmni-msf/release-artifacts/release-3.4/bahmniapps.zip
-nagios_contact_email: randomsome8@gmail.com
-ssmtp_auth_user: randomsome8@gmail.com
-ssmtp_auth_pass: pass123123
+openmrs_db_password: "P@ssw0rd123"
+mysql_root_password: "P@ssw0rd123"
+mysql_old_root_password: "P@ssw0rd"
+reports_db_password: "P@ssw0rd123"
+nagios_contact_email:
+ssmtp_auth_user:
+ssmtp_auth_pass:
