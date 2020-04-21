@@ -8,7 +8,7 @@ omods: ["https://s3.ap-south-1.amazonaws.com/bahmni-msf/release-artifacts/releas
 bahmniapps_url: https://s3.ap-south-1.amazonaws.com/bahmni-msf/release-artifacts/release-3.4/bahmniapps.zip
 openmrs_db_password: "P@ssw0rd123"
 mysql_root_password: "P@ssw0rd123"
-mysql_old_root_password: "P@ssw0rd"
+mysql_old_root_password: "password"
 reports_db_password: "P@ssw0rd123"
 nagios_contact_email:
 ssmtp_auth_user:
