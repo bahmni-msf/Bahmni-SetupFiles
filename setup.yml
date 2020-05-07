@@ -1,10 +1,10 @@
 timezone: Asia/Kolkata
-implementation_name: default
+implementation_name: myhospital
 selinux_state: disabled
-openmrs_db_password: "P@ssw0rd123"
-mysql_root_password: "P@ssw0rd123"
-mysql_old_root_password: "password"
-reports_db_password: "P@ssw0rd123"
-nagios_contact_email:
-ssmtp_auth_user:
-ssmtp_auth_pass:
+#openmrs_db_password: "P@ssw0rd123"
+#mysql_root_password: "P@ssw0rd123"
+#mysql_old_root_password: "password"
+#reports_db_password: "P@ssw0rd123"
+#nagios_contact_email:
+#ssmtp_auth_user:
+#ssmtp_auth_pass:
