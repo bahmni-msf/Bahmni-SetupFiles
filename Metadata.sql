@@ -2,7 +2,7 @@
 set @uid = uuid();
 
 INSERT INTO openmrs.person (gender, birthdate, birthdate_estimated, dead, death_date, cause_of_death, creator, date_created, changed_by, date_changed, voided,
-voided_by, date_voided, void_reason, uuid, deathdate_estimated, birthtime) VALUES ('M', null, 0, 0, null, null, 1, now(), null, null, 0, null, null, null, @uid, 0, null);
+                            voided_by, date_voided, void_reason, uuid, deathdate_estimated, birthtime) VALUES ('M', null, 0, 0, null, null, 1, now(), null, null, 0, null, null, null, @uid, 0, null);
 
 -- Create a provider with person ID
 set @pid = null;
@@ -28,7 +28,7 @@ INSERT INTO openmrs.visit_type (name, description, creator, date_created, change
 -- Insert a sample Location
 
 set @hospital_uuid = uuid();
-
+select @hospital_uuid as hospital_uuid;
 
 set @location_id = null;
 set @location_tag_id = null;
@@ -36,18 +36,19 @@ set @visit_location_tag_id = null;
 
 INSERT INTO openmrs.location (name, description, address1, address2, city_village, state_province, postal_code, country, latitude, longitude, creator, date_created, county_district, address3, address4, address5, address6, retired, retired_by, date_retired, retire_reason, parent_location, uuid, changed_by, date_changed) VALUES ('Hospital', null, null, null, null, null, null, null, null, null, 1, now(), null, null, null, null, null, 0, null, null, null, null, @hospital_uuid, null, null);
 
-select location_id into @location_id from location where uuid=@hospital_uuid;
+select location_id into @location_id from location where name ='Hospital';
 
 SELECT location_tag_id into @location_tag_id from location_tag where name = 'Login Location';
 
 SELECT location_tag_id into @visit_location_tag_id from location_tag where name = 'Visit Location';
 
-INSERT INTO openmrs.location_tag_map values(@location_id,(SELECT location_tag_id from location_tag where name = 'Login Location'));
+INSERT INTO openmrs.location_tag_map values(@location_id,@location_tag_id);
 
 INSERT INTO openmrs.location_tag_map values(@location_id,@visit_location_tag_id);
 
 -- Give Required Privileges to superman
 set @superman_id = null;
+select user_id from openmrs.users where username = 'superman';
 select user_id into @superman_id from openmrs.users where username = 'superman';
 INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'Admin-App');
 INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'Anonymous');
