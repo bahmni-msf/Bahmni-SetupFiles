@@ -42,7 +42,7 @@ SELECT location_tag_id into @location_tag_id from location_tag where name = 'Log
 
 SELECT location_tag_id into @visit_location_tag_id from location_tag where name = 'Visit Location';
 
-INSERT INTO openmrs.location_tag_map values(@location_id,@location_tag_id);
+INSERT INTO openmrs.location_tag_map values(@location_id,(SELECT location_tag_id from location_tag where name = 'Login Location'));
 
 INSERT INTO openmrs.location_tag_map values(@location_id,@visit_location_tag_id);
 
