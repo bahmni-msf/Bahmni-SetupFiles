@@ -1,13 +1,12 @@
 -- Give Required Privileges to superman
-set @superman_id = null;
-select  user_id into @superman_id from openmrs.users where username = 'superman';
-INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'Privilege Level: Full');
-INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'bahmni-document-uploader');
-INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'Doctor');
-INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'Nurse');
-INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'RegistrationClerk');
-INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'System Developer');
-INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'Provider');
+select  user_id from openmrs.users where username = 'superman';
+INSERT INTO openmrs.user_role (user_id, role) VALUES ((select  user_id from openmrs.users where username = 'superman'),'Privilege Level: Full');
+INSERT INTO openmrs.user_role (user_id, role) VALUES ((select  user_id from openmrs.users where username = 'superman'),'bahmni-document-uploader');
+INSERT INTO openmrs.user_role (user_id, role) VALUES ((select  user_id from openmrs.users where username = 'superman'),'Doctor');
+INSERT INTO openmrs.user_role (user_id, role) VALUES ((select  user_id from openmrs.users where username = 'superman'),'Nurse');
+INSERT INTO openmrs.user_role (user_id, role) VALUES ((select  user_id from openmrs.users where username = 'superman'),'RegistrationClerk');
+INSERT INTO openmrs.user_role (user_id, role) VALUES ((select  user_id from openmrs.users where username = 'superman'),'System Developer');
+INSERT INTO openmrs.user_role (user_id, role) VALUES ((select  user_id from openmrs.users where username = 'superman'),'Provider');
 
 -- Give 'Get Locations' Privilege to Anonymous
 INSERT INTO openmrs.role_privilege (role, privilege) VALUES ('Anonymous', 'Get Locations');
