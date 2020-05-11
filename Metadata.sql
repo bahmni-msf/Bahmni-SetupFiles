@@ -49,7 +49,8 @@ INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'Bahmni-App-
 INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'Provider');
 INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'System Developer');
 INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'SuperAdmin');
-INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'Privilege Level: Full');
+select role into @role from role where role = 'Privilege Level: Full';
+INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, @role);
 
 -- Give 'Get Locations' Privilege to Anonymous
 INSERT INTO openmrs.role_privilege (role, privilege) VALUES ('Anonymous', 'Get Locations');
