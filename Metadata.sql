@@ -38,11 +38,11 @@ INSERT INTO openmrs.location (name, description, address1, address2, city_villag
 
 select location_id into @location_id from location where name ='Hospital';
 
-SELECT location_tag_id into @location_tag_id from location_tag where name = 'Login Location';
+SELECT location_tag_id into @login_location_tag_id from location_tag where name = 'Login Location';
 
 SELECT location_tag_id into @visit_location_tag_id from location_tag where name = 'Visit Location';
 
-INSERT INTO openmrs.location_tag_map values(@location_id,@location_tag_id);
+INSERT INTO openmrs.location_tag_map values(@location_id,@login_location_tag_id);
 
 INSERT INTO openmrs.location_tag_map values(@location_id,@visit_location_tag_id);
 
