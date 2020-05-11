@@ -28,7 +28,7 @@ INSERT INTO openmrs.visit_type (name, description, creator, date_created, change
 -- Insert a sample Location
 
 set @hospital_uuid = uuid();
-select @hospital_uuid as hospital_uuid;
+
 
 set @location_id = null;
 set @location_tag_id = null;
@@ -64,3 +64,5 @@ INSERT INTO openmrs.user_role (user_id, role) VALUES (@superman_id, 'Privilege L
 
 -- Give 'Get Locations' Privilege to Anonymous
 INSERT INTO openmrs.role_privilege (role, privilege) VALUES ('Anonymous', 'Get Locations');
+
+
