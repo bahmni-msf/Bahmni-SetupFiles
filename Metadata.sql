@@ -2,7 +2,7 @@
 set @uid = uuid();
 
 INSERT INTO openmrs.person (gender, birthdate, birthdate_estimated, dead, death_date, cause_of_death, creator, date_created, changed_by, date_changed, voided,
-voided_by, date_voided, void_reason, uuid, deathdate_estimated, birthtime) VALUES ('M', null, 0, 0, null, null, 1, now(), null, null, 0, null, null, null, @uid, 0, null);
+                            voided_by, date_voided, void_reason, uuid, deathdate_estimated, birthtime) VALUES ('M', null, 0, 0, null, null, 1, now(), null, null, 0, null, null, null, @uid, 0, null);
 
 -- Create a provider with person ID
 set @pid = null;
@@ -19,35 +19,19 @@ INSERT INTO openmrs.users (system_id, username, password, salt, secret_question,
 
 
 -- Insert OPD, IPD visit types
-
-
 INSERT INTO openmrs.visit_type (name, description, creator, date_created, changed_by, date_changed, retired, retired_by, date_retired, retire_reason, uuid) VALUES ('OPD', 'Visit for patients coming for OPD', 1, now(), null, null, 0, null, null, null, uuid());
-
 INSERT INTO openmrs.visit_type (name, description, creator, date_created, changed_by, date_changed, retired, retired_by, date_retired, retire_reason, uuid) VALUES ('IPD', 'Visit for patients coming for IPD', 1, now(), null, null, 0, null, null, null, uuid());
 
 -- Insert a sample Location
 
 set @hospital_uuid = uuid();
 
-set @location_id = null;
-set @location_tag_id = null;
-set @visit_location_tag_id = null;
-
 INSERT INTO openmrs.location (name, description, address1, address2, city_village, state_province, postal_code, country, latitude, longitude, creator, date_created, county_district, address3, address4, address5, address6, retired, retired_by, date_retired, retire_reason, parent_location, uuid, changed_by, date_changed) VALUES ('Hospital', null, null, null, null, null, null, null, null, null, 1, now(), null, null, null, null, null, 0, null, null, null, null, @hospital_uuid, null, null);
 
-select location_id into @location_id from location where uuid=@hospital_uuid;
-
-SELECT location_tag_id into @location_tag_id from location_tag where name = 'Login Location';
-
-SELECT location_tag_id into @visit_location_tag_id from location_tag where name = 'Visit Location';
-
-INSERT INTO openmrs.location_tag_map values(@location_id,@location_tag_id);
-
-INSERT INTO openmrs.location_tag_map values(@location_id,@visit_location_tag_id);
-
+INSERT INTO openmrs.location_tag_map values((select location_id from location where uuid=@hospital_uuid),(SELECT location_tag_id from location_tag where name = 'Login Location'));
+INSERT INTO openmrs.location_tag_map values((select location_id from location where uuid=@hospital_uuid),(SELECT location_tag_id from location_tag where name = 'Visit Location'));
 
 -- Add Basic Roles to Access Bahmni
-
 INSERT INTO role (role, description, uuid) values ('bahmni-document-uploader', 'bahmni-document-uploader', uuid());
 INSERT INTO role (role, description, uuid) values ('Doctor', 'Role for the doctor', uuid());
 INSERT INTO role (role, description, uuid) values ('Nurse', 'Role for the nurse', uuid());
